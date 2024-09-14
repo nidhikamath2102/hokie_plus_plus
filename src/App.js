@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useLogoutFunction, useRedirectFunctions, withAuthInfo } from '@propelauth/react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = withAuthInfo(({isLoggedIn}) => {
+  const logoutFn = useLogoutFunction()
+  const {redirectToSignupPage, redirectToLoginPage} = useRedirectFunctions();
+    
+  if (isLoggedIn) {
+      return <div>
+          <p>The User is logged in</p>
+          <button onClick={() => logoutFn(true)}>
+              Click here to log out
+          </button>
+      </div>
+  } else {
+      return <div>
+          To get started, please log in as test user.
+          <br/>
+          <button onClick={() => redirectToSignupPage()}>
+              Sign up
+          </button>
+          <button onClick={() => redirectToLoginPage()}>
+              Log in
+          </button>
+      </div>
+  }
+})
 
 export default App;
