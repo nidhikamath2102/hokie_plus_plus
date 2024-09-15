@@ -19,7 +19,7 @@ root.render(
   <React.StrictMode>
     <AuthProvider authUrl={authUrl}>
 	    <BrowserRouter>
-	      <App/>
+          <App/>
 	    </BrowserRouter>
     </AuthProvider>
   </React.StrictMode>
