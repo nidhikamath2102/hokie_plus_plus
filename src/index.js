@@ -4,10 +4,20 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 
+const authUrl = "https://1819377.propelauthtest.com";
+console.log("Auth URL:", authUrl);
+
+try {
+  new URL(authUrl);
+} catch (e) {
+  console.error("Invalid authUrl:", authUrl);
+  throw new Error("Invalid authUrl");
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AuthProvider authUrl={process.env.REACT_APP_PROPELAUTH_AUTH_URL}>
+    <AuthProvider authUrl={authUrl}>
 	    <BrowserRouter>
 	      <App/>
 	    </BrowserRouter>
